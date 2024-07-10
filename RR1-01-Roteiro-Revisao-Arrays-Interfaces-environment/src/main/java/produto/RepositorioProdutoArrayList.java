@@ -99,7 +99,7 @@ public class RepositorioProdutoArrayList {
 	public void remover(int codigo) {
 		// TODO Implement your code here
 		int i = procurarIndice(codigo);
-		if(i == -1){
+		if(i != -1){
 			this.produtos.remove(new Produto(codigo, null, 0, null));
 		}else{
 			throw new RuntimeException("Produto não encontrado");
@@ -116,14 +116,13 @@ public class RepositorioProdutoArrayList {
 	 */
 	public Produto procurar(int codigo) {
 		// TODO Implement your code here
-		Produto prod = null;
+		int i = procurarIndice(codigo);
 
-		if(existe(codigo)){
-			int i = procurarIndice(codigo);
-			prod = (Produto) this.produtos.get(i);
+		if(i != -1){
+			return (Produto) this.produtos.get(i);
 		}else{
-			throw new RuntimeException("Produto não encontrado");
+			return null;
 		}
-		return prod;
+		
 	}
 }
