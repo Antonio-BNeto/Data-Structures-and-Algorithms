@@ -42,7 +42,15 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	private int procurarIndice(int codigo) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int output = -1;
+
+		for(int i = 0; i <= this.produtos.length; i++){
+			if(this.produtos[i].getCodigo() == codigo){
+				output = i;
+			}
+		}
+
+		return output;
 	}
 
 	/**
@@ -53,7 +61,14 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	public boolean existe(int codigo) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		boolean output = false;
+		int i = procurarIndice(codigo);
+		
+		if(i != -1){
+			output = true;
+		} 
+
+		return output;
 	}
 
 	/**
@@ -61,7 +76,8 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	public void inserir(ProdutoNaoPerecivel produto) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		this.produtos[index+1] = produto;
+		this.index ++;
 	}
 
 	/**
@@ -71,7 +87,12 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	public void atualizar(ProdutoNaoPerecivel produto) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(existe(produto.getCodigo())){
+			int i = procurarIndice(produto.getCodigo());
+			this.produtos[i] = produto;
+		}else{
+			throw new RuntimeException("Produto não encontrado");
+		}
 	}
 
 	/**
@@ -83,7 +104,13 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	public void remover(int codigo) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (existe(codigo)) {
+			int i = procurarIndice(codigo);
+			this.produtos[i] = null;
+			this.index--;
+		}else{
+			throw new RuntimeException("Produto não encontrado");
+		}
 	}
 
 	/**
@@ -95,7 +122,16 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 */
 	public ProdutoNaoPerecivel procurar(int codigo) {
 		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		ProdutoNaoPerecivel output = null;
+
+		if (existe(codigo)) {
+			int i = procurarIndice(codigo);
+			output = this.produtos[i];
+		}else{
+			throw new RuntimeException("Produto não encontrado");
+		}
+		
+		return output;
 	}
 
 }
