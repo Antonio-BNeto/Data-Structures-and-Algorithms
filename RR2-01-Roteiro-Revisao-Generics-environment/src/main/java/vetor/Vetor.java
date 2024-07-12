@@ -9,10 +9,10 @@ import java.util.Comparator;
  * @author Adalberto
  *
  */
-public class Vetor {
+public class Vetor<V> {
 
 	// O array interno onde os objetos manipulados são guardados
-	private Object[] arrayInterno;
+	private V[] arrayInterno;
 
 	// O tamanho que o array interno terá
 	private int tamanho;
@@ -39,33 +39,56 @@ public class Vetor {
 	}
 
 	// Insere um objeto no vetor
-	public void inserir(Object o) {
+	public void inserir(V vetor) {
 		// TODO Remove the exception and implement your code
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(indice < tamanho){
+			arrayInterno[++indice] = vetor;
+		}
+		
 	}
 
 	// Remove um objeto do vetor
-	public Object remover(Object o) {
+	public V remover(V vetor) {
 		// TODO Remove the exception and implement your code
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(!isVazio()){
+			for(int i = 0; i< indice+1 ;i++){
+				if(arrayInterno[i].equals(vetor)){
+					arrayInterno[i] = null;
+					indice --;
+					return vetor;
+				};
+			}
+		}
+		return null;
 	}
 
 	// Procura um elemento no vetor
-	public Object procurar(Object o) {
+	public V procurar(V vetor) {
 		// TODO Remove the exception and implement your code
-		throw new UnsupportedOperationException("Not implemented yet!");
+		for(V elementos: arrayInterno){
+			if(elementos.equals(vetor)){
+				return elementos;
+			}
+		}
+		return null;
 	}
 
 	// Diz se o vetor está vazio
 	public boolean isVazio() {
 		// TODO Remove the exception and implement your code
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(indice == -1){
+			return true;
+		}
+		return false;
 	}
 
 	// Diz se o vetor está cheio
 	public boolean isCheio() {
 		// TODO Remove the exception and implement your code
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(indice == tamanho-1){
+			return true;
+		}
+		return false;
 	}
 
 }
