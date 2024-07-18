@@ -9,10 +9,11 @@ import java.util.Comparator;
  * @author Adalberto
  *
  */
-public class Vetor<o> {
+
+public class Vetor<T extends Comparable<T>> {
 
 	// O array interno onde os objetos manipulados são guardados
-	private Object[] arrayInterno;
+	private	T[] arrayInterno;
 
 	// O tamanho que o array interno terá
 	private int tamanho;
@@ -21,36 +22,37 @@ public class Vetor<o> {
 	private int indice;
 
 	// O Comparators a serem utilizados
-	private Comparator comparadorMaximo;
-	private Comparator comparadorMinimo;
+	private Comparator<T> ComparadorMaximo;
+	private Comparator<T> ComparadorMinimo;
 
 	public Vetor(int tamanho) {
 		super();
 		this.tamanho = tamanho;
 		this.indice = -1;
+		this.arrayInterno = (T[]) new Comparable[tamanho];
 	}
 
-	public void setComparadorMaximo(Comparator comparadorMaximo) {
-		this.comparadorMaximo = comparadorMaximo;
+	public void setComparadorMaximo(Comparator<T> comparadorMaximo) {
+		this.ComparadorMaximo = comparadorMaximo;
 	}
 
-	public void setComparadorMinimo(Comparator comparadorMinimo) {
-		this.comparadorMinimo = comparadorMinimo;
+	public void setComparadorMinimo(Comparator<T> comparadorMinimo) {
+		this.ComparadorMinimo = comparadorMinimo;
 	}
 
 	// Insere um objeto no vetor
-	public void inserir(Object o) {
+	public void inserir(T o) {
 		if(indice < tamanho){
 			arrayInterno[++indice] = o;
 		}
 	}
 
 	// Remove um objeto do vetor
-	public Object remover(Object o) {
+	public T remover(T o) {
 		if(!isVazio()){
 			for(int i=0; i< indice+1; i++){
 				if (arrayInterno[i].equals(o)) {
-					Object key = arrayInterno[i];
+					T key = arrayInterno[i];
 					for(int j = i; j < indice+1;j++){
 						arrayInterno[j] = arrayInterno[j+1];
 					}
@@ -64,13 +66,18 @@ public class Vetor<o> {
 	}
 
 	// Procura um elemento no vetor
-	public Object procurar(Object o) {
-		for(Object vetor: arrayInterno){
-			if (vetor.equals(o)) {
-				return vetor;
+	public T procurar(T o) {
+		T result = null;
+		boolean achou = false;
+		int i = 0;
+		while (i<=indice && !achou) {
+			if(arrayInterno[i].equals(o)){
+				result = arrayInterno[i];
+				achou = true;
 			}
+			i++;
 		}
-		return null;
+		return result;
 	}
 
 	// Diz se o vetor está vazio
@@ -87,6 +94,52 @@ public class Vetor<o> {
 			return true;
 		}
 		return false;
+	}
+
+	public T maximo(){
+		T result = null;
+		if(!isVazio()){
+			result = arrayInterno[0];
+			for(int i = 0; i<=indice; i++){
+				if(ComparadorMaximo.compare(result, arrayInterno[i])<0){
+					result = arrayInterno[i];
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	public T minimo(){
+		T result = null;
+		if(!isVazio()){
+			result = arrayInterno[0];
+			for(int i = 0; i<= indice; i++){
+				if(ComparadorMinimo.compare(result, arrayInterno[i])<0){
+					result = arrayInterno[i];
+				}
+			}
+		}
+		return result;
+	}
+	
+
+}
+
+class ComparadorMaximo implements Comparator<Aluno> {
+
+	@Override
+	public int compare(Aluno o1, Aluno o2) {
+		return (int) (o1.getMedia() - o2.getMedia());
+	}
+
+}
+
+class ComparadorMinimo implements Comparator<Aluno> {
+
+	@Override
+	public int compare(Aluno o1, Aluno o2) {
+		return (int) (o2.getMedia() - o1.getMedia());
 	}
 
 }
