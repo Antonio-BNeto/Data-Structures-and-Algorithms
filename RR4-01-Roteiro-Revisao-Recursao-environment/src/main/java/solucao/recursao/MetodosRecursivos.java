@@ -31,7 +31,7 @@ public class MetodosRecursivos {
 	}
 
 	// embora este metodo naoseja recursivo em si, ele chama um outro metodo que
-	// eh recursivo. Assim, a colucao utiliza recursao.
+	// eh recursivo. Assim, a solucao utiliza recursao.
 	public int countNotNull(Object[] array) {
 		int result = 0;
 		result = countNotNull(array, 0);
@@ -76,7 +76,7 @@ public class MetodosRecursivos {
 		if (n == 1) {
 			// caso base: nao faz nada
 		} else {
-			result = progressaoAritmetica(termoInicial, razao, n - 1) * razao;
+			result = progressaoGeometrica(termoInicial, razao, n - 1) * razao;
 		}
 		return result;
 	}
