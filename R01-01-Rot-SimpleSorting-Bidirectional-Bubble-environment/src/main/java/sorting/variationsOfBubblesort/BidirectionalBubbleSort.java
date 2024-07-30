@@ -35,6 +35,5 @@ public class BidirectionalBubbleSort<T extends Comparable<T>> extends
 			}
 			leftIndex++;
 		}
-
 	}
 }
