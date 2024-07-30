@@ -57,3 +57,23 @@
   <level>FINE</level>
   <message>File 123110363-ANTONIO BARROS DE ALCANTARA NETO.zip was received. It was sent by ANTONIO BARROS DE ALCANTARA NETO from IP 192.168.0.105 at 30-07-2024 20*14*24</message>
 </record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-07-30T20:19:19.673-0300</date>
+  <logger>ANTONIO BARROS DE ALCANTARA NETO</logger>
+  <level>FINE</level>
+  <message>File 123110363-ANTONIO BARROS DE ALCANTARA NETO.zip was received. It was sent by ANTONIO BARROS DE ALCANTARA NETO from IP 192.168.0.105 at 30-07-2024 20*19*19</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-07-30T20:19:30.318-0300</date>
+  <logger>ANTONIO BARROS DE ALCANTARA NETO</logger>
+  <level>FINE</level>
+  <message>File 123110363-ANTONIO BARROS DE ALCANTARA NETO.zip was received. It was sent by ANTONIO BARROS DE ALCANTARA NETO from IP 192.168.0.105 at 30-07-2024 20*19*30</message>
+</record>
