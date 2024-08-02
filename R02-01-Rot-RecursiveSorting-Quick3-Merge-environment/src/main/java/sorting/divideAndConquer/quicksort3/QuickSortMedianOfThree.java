@@ -21,6 +21,9 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		AbstractSorting<T> {
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
+		if (leftIndex >= rightIndex || rightIndex >= array.length) {
+			return;
+		}
 		if(leftIndex < rightIndex){
 			int pivotIndex = partition(array, leftIndex, rightIndex);
 			sort(array, leftIndex, pivotIndex - 1);
@@ -28,51 +31,39 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		}
 	}
 
-	private T medianThree(T[] array, int leftIndex, int rightIndex){
-		int meio = (leftIndex+rightIndex)/2;
-		
-		if(array[leftIndex].compareTo(array[meio])>0){
-			Util.swap(array, leftIndex, meio);
+	private int medianThree(T[] array, int leftIndex, int rightIndex){
+
+		int meio = (leftIndex + rightIndex) / 2;
+
+		if (array[leftIndex].compareTo(array[rightIndex]) > 0) {
+			Util.swap(array, rightIndex, leftIndex);
 		}
-		if (array[meio].compareTo(array[rightIndex])>0) {
+		if (array[leftIndex].compareTo(array[meio]) > 0) {
+			Util.swap(array, meio, leftIndex);
+		}
+		if (array[meio].compareTo(array[rightIndex]) > 0) {
 			Util.swap(array, rightIndex, meio);
 		}
-		if(array[leftIndex].compareTo(array[rightIndex])>0){
-			Util.swap(array, leftIndex, rightIndex);
-		}
 
-		Util.swap(array, meio, rightIndex-1);
-		int pivot = rightIndex-1;
-
-		return array[pivot];
+		return meio;
 	}
 
 	private int partition(T[] array,int leftIndex,int rightIndex){
-		T pivot = array[rightIndex-1];
-		int left = leftIndex+1;
-		int right = rightIndex-1;
+		int pivotIndex = medianThree(array, leftIndex, rightIndex);
 
-		while (left < right) {
-			while(left<right && array[left].compareTo(pivot)<=0){
-				left++;
-			}
-			while (left<right && array[right].compareTo(pivot)>=0) {
-				right--;
+		int i = rightIndex - 1;
+
+		Util.swap(array, pivotIndex, rightIndex - 1);
+
+		for (int j = i - 1; j >= leftIndex + 1; j--) {
+			if (array[j].compareTo(array[rightIndex - 1]) >= 0) {
+				i--;
+				Util.swap(array, i, j);
 			}
 		}
 
-		if (array[left].compareTo(array[right])>0) {
-			Util.swap(array, left, right);
-		}else{
-			left = right;
-		}
+		Util.swap(array, i, rightIndex - 1);
 
-		return left;
+		return i;
 	}
-
-	private int maior(T[] array, int a, int b){
-		if(array[a].compareTo(array[b])>0) return a;
-		return b;
-	}
-
 }
