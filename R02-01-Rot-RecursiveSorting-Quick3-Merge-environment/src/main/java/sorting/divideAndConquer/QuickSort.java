@@ -15,10 +15,13 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		if(leftIndex < rightIndex){
-			int pivotIndex = partition(array, leftIndex, rightIndex);
-			sort(array, leftIndex, pivotIndex - 1);
-			sort(array, pivotIndex + 1, rightIndex);
+		if(leftIndex >= 0 && rightIndex < array.length ){
+			
+			if(leftIndex < rightIndex){
+				int pivotIndex = partition(array, leftIndex, rightIndex);
+				sort(array, leftIndex, pivotIndex - 1);
+				sort(array, pivotIndex + 1, rightIndex);
+			}
 		}
 	}
 

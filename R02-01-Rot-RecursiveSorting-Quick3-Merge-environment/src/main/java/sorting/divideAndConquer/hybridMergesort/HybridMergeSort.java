@@ -32,9 +32,12 @@ public class HybridMergeSort<T extends Comparable<T>> extends
 	protected static int INSERTIONSORT_APPLICATIONS = 0;
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
+
 		MERGESORT_APPLICATIONS = 0;
 		INSERTIONSORT_APPLICATIONS = 0;
-		hybridMergeSort(array, leftIndex, rightIndex);
+		if (leftIndex >= 0 && rightIndex<array.length) {
+			hybridMergeSort(array, leftIndex, rightIndex);
+		}
 	}
 
 	private void hybridMergeSort(T[] array, int leftIndex, int rightIndex){
