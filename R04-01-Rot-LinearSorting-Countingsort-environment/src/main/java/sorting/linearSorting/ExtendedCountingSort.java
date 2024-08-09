@@ -12,11 +12,12 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		if(array.length>leftIndex && array!=null){
+		if(array != null && leftIndex>=0 && leftIndex < rightIndex && rightIndex<array.length){
 
 			int min = array[leftIndex];
 			int max = array[leftIndex];
 
+			//pegando o maior e o menor elemento do array inicial.
 			for(int i = leftIndex+1; i<= rightIndex;i++){
 				if(array[i]< min){
 					min = array[i];
@@ -26,12 +27,14 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 				}
 			}
 
+			//array auxiliar
 			int[] C = new int[max-min +1];
 
 			for(int i = leftIndex;i<=rightIndex;i++){
 				C[array[i]-min]++;
 			}
 
+			//Soma acumulativa do elementos do array C
 			for(int i = 1;i<C.length;i++){
 				C[i]+=C[i-1];
 			}
@@ -43,6 +46,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 				B[C[array[i]-min]] = array[i];
 			}
 
+			//Colocando todos os elementos ordenados que estão no array B no array passado como parametro.
 			int indexB = 0; 
 			for(int i = leftIndex ;i<= rightIndex;i++){
 				array[i] = B[indexB];
