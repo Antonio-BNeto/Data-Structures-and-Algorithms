@@ -46,5 +46,14 @@ public class FloorBinarySearchTest {
         assertEquals((Integer) 4,floorBinarySearch.floor(vetorTamPar, 5));
     }
 
+    @Test
+    public void test05(){
+        assertEquals((Integer) (-54), floorBinarySearch.floor(vetorTamImpar, -53));
+    }
+
+    @Test
+    public void test06(){
+        assertEquals((Integer) 1, floorBinarySearch.floor(vetorValoresIguais, 1));
+    }
     
 }
