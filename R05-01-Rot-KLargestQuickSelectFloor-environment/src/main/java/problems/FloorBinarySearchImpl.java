@@ -6,34 +6,45 @@ public class FloorBinarySearchImpl implements Floor {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		sort(array, 0, array.length-1);
-		int floorindex = floorBinarySearch(array, 0, array.length-1, x);
-		return array[floorindex];
-	}
-
-	private int floorBinarySearch(Integer[] array, int leftIndex, int rightIndex, int value){
-		if(leftIndex<=rightIndex){
-
-			int middle = (rightIndex-leftIndex)/2;
-
-			if(array[middle] == value){
-				return middle;
-			}else if(array[middle]<value){
-				
-				floorBinarySearch(array, middle+1, rightIndex, value);
-			}else{
-				floorBinarySearch(array, leftIndex, middle-1, value);
-			}
+		if (array != null && array.length > 0 && x != null){
+			quickSort(array, 0, array.length-1);
+			return floorBinarySearch(array, x, 0, array.length-1);
 		}
-		return -1;
+		return null;
+	}
+
+	private Integer floorBinarySearch(Integer[] array,Integer value, Integer leftIndex, Integer rightIndex){
+		
+		if (leftIndex > rightIndex) {
+			return null;
+		}
+
+		if(array[rightIndex]<=value){
+			return array[rightIndex];
+		}
+
+		int middle = (rightIndex+leftIndex)/2;
+
+		if(middle > 0  && array[middle-1]<= value && value< array[middle]){
+			return array[middle-1];
+		}
+
+		if(array[middle] > value){
+			return floorBinarySearch(array, value, leftIndex, (middle-1));
+	
+		}
+
+		return floorBinarySearch(array, value, (middle+1), rightIndex);
+		
+		
 	}
 
 
-	private void sort(Integer[] array, int leftIndex, int rightIndex){
-		if(leftIndex < rightIndex){
+	private void quickSort(Integer[] array, int leftIndex, int rightIndex){
+		if(array != null && leftIndex >= 0 && leftIndex < rightIndex && rightIndex < array.length){
 			int pivotIndex = partition(array, leftIndex, rightIndex);
-			sort(array, leftIndex, pivotIndex - 1);
-			sort(array, pivotIndex + 1, rightIndex);
+			quickSort(array, leftIndex, pivotIndex - 1);
+			quickSort(array, pivotIndex + 1, rightIndex);
 		}
 	}
 

@@ -1,5 +1,9 @@
 package orderStatistic;
 
+import java.util.Arrays;
+
+import util.Util;
+
 /**
  * Uma implementacao da interface KLargest que usa estatisticas de ordem para 
  * retornar um array com os k maiores elementos de um conjunto de dados/array.
@@ -29,9 +33,13 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
-		//este metodo deve obrigatoriamente usar o orderStatistics abaixo.
+		T[] result =(T[]) new Comparable[0];
+
+		if(k >= array.length && array.length>0){
+			orderStatistics(array, array.length-k);
+			result = Arrays.copyOfRange(array, array.length-k, array.length);
+		}
+		return result;
 	}
 
 	/**
@@ -46,7 +54,21 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");		
+		T result = null;
+		
+		if(k>=1 && k>=array.length && array.length>0){
+			for(int i = 0;i<=k; i++){
+				int smallest = i;
+
+				for(int j = i+1;j<array.length ;j++){
+					if(array[j].compareTo(array[smallest])<0){
+						Util.swap(array, smallest, j);
+					}
+				}
+				
+			}
+			result = array[k-1];
+		}
+		return result;
 	}
 }

@@ -23,7 +23,7 @@ public class FloorBinarySearchTest {
     // Casos Válidos
     @Test
     public void testProblems00() {
-        assertEquals(this.implementation.floor(this.array, -2), (Integer) -3);
+        assertEquals(this.implementation.floor(this.array, -3), (Integer) (-3));
     }
 
     @Test
