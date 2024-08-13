@@ -30,7 +30,7 @@ public class KLargestOrderStatisticsTest {
     @Test
     public void test01(){
         Integer[] result = new Integer[]{28, 20, 13};
-       // assertArrayEquals(result, KLargest.getKLargest(vetorTamPar, 3));
+       assertArrayEquals(result, KLargest.getKLargest(vetorTamPar, 3));
     }
 
 }

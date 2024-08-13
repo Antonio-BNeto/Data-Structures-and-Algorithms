@@ -14,7 +14,7 @@ public class QuickSelectTest {
 	private Integer[] vetorValoresRepetidos;
 	private Integer[] vetorValoresIguais;
     private Integer[] vetorDoisValores;
-    private Integer[] vetorValoresNull;
+    private Integer[] vetorUnitario;
 
     @Before
     public void setUp(){
@@ -25,31 +25,142 @@ public class QuickSelectTest {
         this.vetorValoresIguais = new Integer[]{1, 2, 4, 5, 1, 68, -1, 2, 1};
         this.vetorValoresRepetidos = new Integer[]{4, 4, 4, 4, 4, 4, 4, 4};
         this.vetorDoisValores = new Integer[]{0, 1};
-        this.vetorValoresNull = new Integer[]{null, null, null};
+        this.vetorUnitario = new Integer[]{1};
     }
 
+    /**TESTES PARA O VETOR DE TAMANHO PAR */
+
     @Test
-    public void test01(){
+    public void firstOrdersStatiscsVetorTamPar(){
         assertEquals((Integer) (-1),quick.quickSelect(vetorTamPar, 1));
     }
 
     @Test
-    public void test02(){
-        assertEquals((Integer) 0, quick.quickSelect(vetorTamPar, 2));
-    }
-
-    @Test
-    public void test03(){
+    public void lastOrderStatiscsVetorTamPar(){
         assertEquals((Integer) 28, quick.quickSelect(vetorTamPar, 10));
     }
 
     @Test
-    public void test04(){
+    public void middleOrderStatiscsVetorTamPar(){
+        assertEquals((Integer) 4, quick.quickSelect(vetorTamPar, 5));
+    }
+
+    //Estatistica de ordem acima da faixa.
+
+    @Test
+    public void aboveRangeVetorTamPar(){
         assertEquals((Integer) null, quick.quickSelect(vetorTamPar, 11));
     }
+
+    //Estatistica de ordem abaixo da faixa.
+
     @Test
-    public void test05(){
+    public void bellowRangeVetorTamPar(){
         assertEquals((Integer) null, quick.quickSelect(vetorTamPar, 0));
+    }
+
+    /*TESTES PARA O VETOR DO TAMANHO IMPAR*/
+    
+    @Test
+    public void firstOrdersStatiscsVetorTamImpar(){
+        assertEquals((Integer) (-54),quick.quickSelect(vetorTamImpar, 1));
+    }
+
+    @Test
+    public void lastOrderStatiscsVetorTamImpar(){
+        assertEquals((Integer) 46, quick.quickSelect(vetorTamImpar, 11));
+    }
+
+    @Test
+    public void middleOrderStatiscsVetorTamImpar(){
+        assertEquals((Integer) 13, quick.quickSelect(vetorTamImpar, 5));
+    }
+
+    //Estatistica de ordem acima da faixa.
+
+    @Test
+    public void aboveRangeVetorTamImpar(){
+        assertEquals((Integer) null, quick.quickSelect(vetorTamImpar, 12));
+    }
+
+    //Estatistica de ordem abaixo da faixa.
+
+    @Test
+    public void bellowRangeVetorTamImpar(){
+        assertEquals((Integer) null, quick.quickSelect(vetorTamImpar, 0));
+    }
+
+    
+    //TESTES PARA VETORES COM ELEMENTOS IGUAIS// 
+
+    @Test
+    public void firstOrdersStatiscsVetorValoresIguais(){
+        assertEquals((Integer) (-1),quick.quickSelect(vetorValoresIguais, 1));
+    }
+
+    @Test
+    public void lastOrderStatiscsVetorValoresIguais(){
+        assertEquals((Integer) 68, quick.quickSelect(vetorValoresIguais, 9));
+    }
+
+    @Test
+    public void middleOrderStatiscsVetorValoresIguais(){
+        assertEquals((Integer) 1, quick.quickSelect(vetorValoresIguais, 4));
+    }
+
+    //Estatistica de ordem acima da faixa.
+
+    @Test
+    public void aboveRangeVetorValoresIguais(){
+        assertEquals((Integer) null, quick.quickSelect(vetorTamPar, 11));
+    }
+
+    //Estatistica de ordem abaixo da faixa.
+
+    @Test
+    public void bellowRangeVetorValoresIguais(){
+        assertEquals((Integer) null, quick.quickSelect(vetorTamPar, 0));
+    }
+
+    /**TESTES PARA O VETOR COM ELEMENTOS TODOS OS ELEMENTOS IGUAIS */
+
+    @Test
+    public void firstOrdersStatiscsVetorValoresRepetidos(){
+        assertEquals((Integer)4,quick.quickSelect(vetorValoresRepetidos, 1));
+    }
+
+    @Test
+    public void lastOrderStatiscsVetorValoresRepetidos(){
+        assertEquals((Integer)4,quick.quickSelect(vetorValoresRepetidos, 8));
+    }
+
+    @Test
+    public void middleOrderStatiscsVetorValoresRepetidos(){
+        assertEquals((Integer) 4, quick.quickSelect(vetorValoresRepetidos, 4));
+    }
+
+    /*TESTES PARA UM VETOR UNITÁRIO */
+
+    @Test
+    public void firstOrderStatiscsVetorUnitario(){
+        assertEquals((Integer)1, quick.quickSelect(vetorUnitario, 1));
+    }
+
+    @Test
+    public void aboveRangeOrderStatiscsVetorUnitario(){
+        assertEquals((Integer)null, quick.quickSelect(vetorUnitario, 2));
+    }
+
+    @Test
+    public void bellowRangeOrderStatiscsVetorUnitario(){
+        assertEquals((Integer)null, quick.quickSelect(vetorUnitario, 0));
+    }
+
+    /**TESTES PARA UM VETOR VAZIO*/
+
+    @Test
+    public void vetorVazio(){
+        assertEquals((Integer) null, quick.quickSelect(vetorVazio, 1));
     }
 
 }
