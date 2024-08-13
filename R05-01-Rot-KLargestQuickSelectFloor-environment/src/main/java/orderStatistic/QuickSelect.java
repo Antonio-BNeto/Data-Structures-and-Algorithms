@@ -44,24 +44,25 @@ public class QuickSelect<T extends Comparable<T>> {
 	 *
 	 */
 	public T quickSelect(T[] array, int k) {
-		if(array != null && k<=array.length && k > 0){
-			return select(array, 0, array.length-1, k);
+		T result = null;
+		if(array.length != 0 && k <= array.length && k > 0){
+			result = select(array, 0, array.length-1, k);
 		}
-		return null;
+		return result;
 	}
 
 	private T select(T[] array, int leftIndex, int rightIndex, int k){
 
-		if(leftIndex==rightIndex){
+		if(leftIndex == rightIndex){
 			return array[leftIndex];
 		}
 
-		int pivotIndex = partition(array, leftIndex, rightIndex);
+		medianThree(array, leftIndex, rightIndex);
+		int pivotIndex = partition(array, leftIndex+1, rightIndex-1);
 
-		T result = null;
+		T result = array[pivotIndex];
 
 		if(pivotIndex == k-1){
-			result = array[pivotIndex];
 
 		}else if(pivotIndex < k-1){
 			result = select(array, pivotIndex + 1, rightIndex, k);
@@ -86,25 +87,25 @@ public class QuickSelect<T extends Comparable<T>> {
 			Util.swap(array, rightIndex, meio);
 		}
 
+		Util.swap(array,meio, leftIndex+1);
+
 		return meio;
 	}
 
-	private int partition(T[] array,int leftIndex,int rightIndex){
-		int pivotIndex = medianThree(array, leftIndex, rightIndex);
+	private int partition(T[] array, int leftIndex, int rightIndex){
 
-		int pivotLoc = rightIndex - 1;
+		T pivot = array[leftIndex];
+		int i = leftIndex;
 
-		Util.swap(array, pivotIndex, rightIndex - 1);
-
-		for (int j = pivotLoc - 1; j >= leftIndex + 1; j--) {
-			if (array[j].compareTo(array[rightIndex - 1]) >= 0) {
-				pivotLoc--;
-				Util.swap(array, pivotLoc, j);
+		for(int j = i+1; j<=rightIndex;j++){
+			if(array[j].compareTo(pivot)<= 0){
+				i++;
+				Util.swap(array, i, j);
 			}
 		}
 
-		Util.swap(array, pivotLoc, rightIndex - 1);
+		Util.swap(array, leftIndex , i);
 
-		return pivotLoc;
+		return i;
 	}
 }

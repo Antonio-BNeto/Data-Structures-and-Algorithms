@@ -2,6 +2,8 @@ package orderStatistic;
 
 import java.util.Arrays;
 
+import javax.swing.UIClientPropertyKey;
+
 import util.Util;
 
 /**
@@ -33,13 +35,10 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
-		T[] result =(T[]) new Comparable[0];
-
-		if(k >= array.length && array.length>0){
-			orderStatistics(array, array.length-k);
-			result = Arrays.copyOfRange(array, array.length-k, array.length);
+ 		if(array != null && k>=1 && k<=array.length){
+			
 		}
-		return result;
+		return null;
 	}
 
 	/**
@@ -54,20 +53,16 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		T result = null;
-		
-		if(k >= 1 && k >= array.length && array.length > 0){
-			for(int i = 0;i<=k; i++){
-				int smallest = i;
-				for(int j = i+1;j<array.length ;j++){
-					if(array[j].compareTo(array[smallest])<0){
-						Util.swap(array, smallest, j);
-					}
-				}
-				
+		bubble(array, array.length-k);
+		return array[array.length-k];
+	}
+
+	private void bubble(T[] array, int rightIndex){
+		for(int i = 0;i<rightIndex;i++){
+			if (array[i].compareTo(array[i+1])>0) {
+				Util.swap(array, i, i+1);
 			}
-			result = array[k-1];
 		}
-		return result;
+
 	}
 }
