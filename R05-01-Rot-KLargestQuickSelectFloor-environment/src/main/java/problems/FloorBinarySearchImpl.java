@@ -19,7 +19,7 @@ public class FloorBinarySearchImpl implements Floor {
 			return null;
 		}
 
-		if(array[rightIndex]<=value){
+		if(array[rightIndex] <= value){
 			return array[rightIndex];
 		}
 
@@ -31,11 +31,9 @@ public class FloorBinarySearchImpl implements Floor {
 
 		if(array[middle] > value){
 			return floorBinarySearch(array, value, leftIndex, (middle-1));
-	
 		}
 
 		return floorBinarySearch(array, value, (middle+1), rightIndex);
-		
 		
 	}
 
@@ -48,21 +46,41 @@ public class FloorBinarySearchImpl implements Floor {
 		}
 	}
 
+	private int medianThree(Integer[] array, int leftIndex, int rightIndex){
+
+		int middle = (leftIndex + rightIndex) / 2;
+
+		if(array[leftIndex] > array[rightIndex]){
+			Util.swap(array, leftIndex, rightIndex);
+		}
+		if(array[leftIndex] > array[middle]){
+			Util.swap(array, leftIndex, middle);
+		}
+		if(array[middle] > array[rightIndex]){
+			Util.swap(array, middle, rightIndex);
+		}
+
+		return middle;
+	}
+
 	private int partition(Integer[] array, int leftIndex, int rightIndex){
 
-		Integer pivot = array[leftIndex];
-		int i = leftIndex;
+		int pivotIndex = medianThree(array, leftIndex, rightIndex);
 
-		for(int j = i+1; j<=rightIndex;j++){
-			if(array[j].compareTo(pivot)<= 0){
-				i++;
+		int i = rightIndex - 1;
+
+		Util.swap(array, pivotIndex, rightIndex - 1);
+
+		for (int j = i - 1; j >= leftIndex + 1; j--) {
+			if (array[j] >= array[rightIndex - 1]) {
+				i--;
 				Util.swap(array, i, j);
 			}
 		}
 
-		Util.swap(array, leftIndex , i);
+		Util.swap(array, i, rightIndex - 1);
 
-		return i;
+		return i;	
+		
 	}
-
 }

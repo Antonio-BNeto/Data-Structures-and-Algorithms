@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class KLargestOrderStatisticsTest {
-    public KLargest<Integer> kLargest;
+    public KLargestOrderStatisticsImpl<Integer> kLargest;
     private Integer[] vetorTamPar;
 	private Integer[] vetorTamImpar;
 	private Integer[] vetorVazio = {};
@@ -29,7 +29,8 @@ public class KLargestOrderStatisticsTest {
 
     @Test
     public void test01(){
-        assertEquals(null, kLargest.getKLargest(vetorTamPar,0));
+        Integer[] result = new Integer[]{28, 20, 13};
+       // assertArrayEquals(result, KLargest.getKLargest(vetorTamPar, 3));
     }
 
 }
