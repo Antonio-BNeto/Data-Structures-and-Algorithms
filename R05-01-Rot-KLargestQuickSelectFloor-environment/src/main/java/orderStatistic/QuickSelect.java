@@ -92,11 +92,12 @@ public class QuickSelect<T extends Comparable<T>> {
 	}
 
 	private int partition(T[] array, int leftIndex, int rightIndex){
-		T pivot = array[leftIndex];
+
+		int pivot = leftIndex;
 		int i = leftIndex;
 
 		for(int j = i+1; j<=rightIndex;j++){
-			if(array[j].compareTo(pivot)<= 0){
+			if(array[j].compareTo(array[pivot])<= 0){
 				i++;
 				Util.swap(array, i, j);
 			}

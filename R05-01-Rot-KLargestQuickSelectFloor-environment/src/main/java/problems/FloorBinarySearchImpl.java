@@ -21,15 +21,15 @@ public class FloorBinarySearchImpl implements Floor {
 
 			int middle = leftIndex+(rightIndex-leftIndex)/2;
 
-			if(array[rightIndex]<=value){
+			if(array[rightIndex].compareTo(value) <= 0){
 				result = array[rightIndex];
 
-			}else if(array[middle]== value){
+			}else if(array[middle].compareTo(value) == 0){
 				result = value;
 
-			}else if(value < array[middle]){
+			}else if(value.compareTo(array[middle]) < 0){
 
-				if(array[middle-1] < value){
+				if(array[middle-1].compareTo(value)<0){
 					result = array[middle-1];
 
 				}else{
@@ -82,7 +82,7 @@ public class FloorBinarySearchImpl implements Floor {
 		int i = leftIndex;
 
 		for(int j = i+1; j<=rightIndex;j++){
-			if(array[j] < array[pivot]){
+			if(array[j].compareTo(array[pivot]) < 0){
 				i++;
 				Util.swap(array, i, j);
 			}
