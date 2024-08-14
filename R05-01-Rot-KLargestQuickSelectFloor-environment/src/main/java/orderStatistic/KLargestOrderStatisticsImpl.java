@@ -38,10 +38,10 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 		T[] Kmaiores;
  		if(array != null && k>=1 && k<=array.length){
 			Kmaiores = (T[]) new Comparable[k];
-
-			for(int i=1; i<=k;i++){
-				array[k-i] = this.orderStatistics(array, i);
+			for(int i = 0; i < k;i++){
+				Kmaiores[i] = orderStatistics(array, array.length-i);
 			}
+			
 		}else{
 			Kmaiores = (T[]) new Comparable[0];
 		} 
@@ -60,16 +60,47 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		bubble(array, array.length-k);
-		return array[array.length-k];
+		T result = null;
+		if(array.length != 0 && k <= array.length && k > 0){
+			result = select(array, 0, array.length-1, k);
+		}
+		return result;
 	}
 
-	private void bubble(T[] array, int rightIndex){
-		for(int i = 0;i<rightIndex;i++){
-			if (array[i].compareTo(array[i+1])>0) {
-				Util.swap(array, i, i+1);
+	private T select(T[] array, int leftIndex, int rightIndex, int k){
+
+		if(leftIndex == rightIndex){
+			return array[leftIndex];
+		}
+
+		int pivotIndex = partition(array, leftIndex, rightIndex);
+
+		T result = array[pivotIndex];
+
+		if(pivotIndex == k-1){
+
+		}else if(pivotIndex < k-1){
+			result = select(array, pivotIndex + 1, rightIndex, k);
+		}else{
+			result = select(array, leftIndex, pivotIndex-1, k);
+		}
+
+		return result;
+	}
+
+	private int partition(T[] array,int leftIndex, int rightIndex){
+		int pivot = leftIndex;
+		int i = leftIndex;
+
+		for(int j = i+1; j<=rightIndex;j++){
+			if(array[j].compareTo(array[pivot])<= 0){
+				i++;
+				Util.swap(array, i, j);
 			}
 		}
 
+		Util.swap(array, leftIndex , i);
+
+		return i;
 	}
 }
