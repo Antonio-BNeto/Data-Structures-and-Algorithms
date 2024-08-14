@@ -1,7 +1,5 @@
 package problems;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import util.Util;
 
 public class FloorBinarySearchImpl implements Floor {
@@ -43,7 +41,6 @@ public class FloorBinarySearchImpl implements Floor {
 		}
 		return result;
 	}
-
 
 	private void quickSort(Integer[] array, int leftIndex, int rightIndex){
 		if(leftIndex==rightIndex || leftIndex < 0 || leftIndex > rightIndex || rightIndex > array.length){
@@ -93,4 +90,5 @@ public class FloorBinarySearchImpl implements Floor {
 		return i;
 		
 	}
+
 }

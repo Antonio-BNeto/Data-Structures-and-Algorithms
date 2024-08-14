@@ -1,16 +1,14 @@
-package orderStatistic;
+package orderStatisc;
 
-import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class KLargestOrderStatisticsTest {
+import orderStatistic.KLargestOrderStatisticsImpl;
 
+public class KLargestOrderStatisticsTest {
     private Integer[] vetorTamPar;
 	private Integer[] vetorTamImpar;
 	private Integer[] vetorVazio = {};
@@ -256,5 +254,4 @@ public class KLargestOrderStatisticsTest {
 		Comparable[] expected = new Comparable[]{};
 		assertArrayEquals(expected, implementation.getKLargest(vetorVazio, 0));
 	}
-
 }

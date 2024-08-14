@@ -1,9 +1,5 @@
 package orderStatistic;
 
-import java.util.Arrays;
-
-import javax.swing.UIClientPropertyKey;
-
 import util.Util;
 
 /**
@@ -64,7 +60,7 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 		if(array.length != 0 && k <= array.length && k > 0){
 			result = select(array, 0, array.length-1, k);
 		}
-		return result;
+		return result;		
 	}
 
 	private T select(T[] array, int leftIndex, int rightIndex, int k){

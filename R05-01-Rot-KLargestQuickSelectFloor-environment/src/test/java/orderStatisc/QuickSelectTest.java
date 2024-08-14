@@ -1,9 +1,11 @@
-package orderStatistic;
+package orderStatisc;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import orderStatistic.QuickSelect;
 
 public class QuickSelectTest {
     public QuickSelect<Integer> quick;
@@ -13,7 +15,6 @@ public class QuickSelectTest {
 	private Integer[] vetorVazio = {};
 	private Integer[] vetorValoresRepetidos;
 	private Integer[] vetorValoresIguais;
-    private Integer[] vetorDoisValores;
     private Integer[] vetorUnitario;
 
     @Before
@@ -24,7 +25,6 @@ public class QuickSelectTest {
         this.vetorTamImpar = new Integer[]{10, 24, 46, -54, 32, 11, 34, 12, 13, 22, 33};
         this.vetorValoresIguais = new Integer[]{1, 2, 4, 5, 1, 68, -1, 2, 1};
         this.vetorValoresRepetidos = new Integer[]{4, 4, 4, 4, 4, 4, 4, 4};
-        this.vetorDoisValores = new Integer[]{0, 1};
         this.vetorUnitario = new Integer[]{1};
     }
 
@@ -162,5 +162,4 @@ public class QuickSelectTest {
     public void vetorVazio(){
         assertEquals((Integer) null, quick.quickSelect(vetorVazio, 1));
     }
-
 }
