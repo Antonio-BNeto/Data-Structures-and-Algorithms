@@ -1,5 +1,7 @@
 package problems;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import util.Util;
 
 public class FloorBinarySearchImpl implements Floor {
@@ -7,55 +9,50 @@ public class FloorBinarySearchImpl implements Floor {
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
 		if (array != null && array.length > 0 && x != null){
-			quickSort(array, 0, array.length-1, x);
+			quickSort(array, 0, array.length-1);
 			return floorBinarySearch(array, x, 0, array.length-1);
 		}
 		return null;
 	}
 
-	private Integer floorBinarySearch(Integer[] array,Integer value, Integer leftIndex, Integer rightIndex){
-		Integer res = null;
+	private Integer floorBinarySearch(Integer[] array,Integer value, int leftIndex, int rightIndex){
+		Integer result = null;
+		if (leftIndex <= rightIndex && array[0]<=value) {
 
-		if (leftIndex <= rightIndex) {
+			int middle = leftIndex+(rightIndex-leftIndex)/2;
 
-			if(array[rightIndex] <= value){
-				return array[rightIndex];
+			if(array[rightIndex]<=value){
+				result = array[rightIndex];
+
+			}else if(array[middle]== value){
+				result = value;
+
+			}else if(value < array[middle]){
+
+				if(array[middle-1] < value){
+					result = array[middle-1];
+
+				}else{
+
+					result = floorBinarySearch(array, value, leftIndex, middle-1);
+				}
+			}else{
+
+				result = floorBinarySearch(array, value, middle+1, rightIndex);
 			}
-
-			int middle = (rightIndex+leftIndex)/2;
-
-			if(middle > 0  && array[middle-1]<= value && value< array[middle]){
-				return array[middle-1];
-			}
-
-			if(array[middle] > value){
-				return floorBinarySearch(array, value, leftIndex, (middle-1));
-			}
-
-			return floorBinarySearch(array, value, (middle+1), rightIndex);
 		}
-		return res;
+		return result;
 	}
 
 
-	private void quickSort(Integer[] array, int leftIndex, int rightIndex, Integer x){
-		if(array != null && leftIndex >= 0 && leftIndex < rightIndex && rightIndex < array.length){
-			
-			int pivotIndex;
+	private void quickSort(Integer[] array, int leftIndex, int rightIndex){
+		if(leftIndex==rightIndex || leftIndex < 0 || leftIndex > rightIndex || rightIndex > array.length){
 
-			if(rightIndex-leftIndex >= 2){
-				medianThree(array, leftIndex, rightIndex);
-				pivotIndex = partition(array, leftIndex+1, rightIndex-1);
-			}else{
-				pivotIndex = partition(array, leftIndex, rightIndex);
-			}
-			
-			if(array[pivotIndex].compareTo(x)<0){
-				quickSort(array, pivotIndex+1, rightIndex, x);
-			}else{
-				quickSort(array, leftIndex, pivotIndex-1, x);
-			}
-			
+		}else{
+			medianThree(array, leftIndex, rightIndex);
+			int pivotIndex = partition(array, leftIndex+1, rightIndex-1);
+			quickSort(array, leftIndex, pivotIndex-1);
+			quickSort(array, pivotIndex+1, rightIndex);	
 		}
 	}
 
@@ -74,10 +71,9 @@ public class FloorBinarySearchImpl implements Floor {
 		}
 
 		if (rightIndex-leftIndex>=2) {
-			
+			Util.swap(array, middle, leftIndex+1);
 		}
 
-		Util.swap(array, middle, leftIndex+1);
 	}
 
 	private int partition(Integer[] array, int leftIndex, int rightIndex){

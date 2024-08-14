@@ -73,7 +73,7 @@ public class QuickSelect<T extends Comparable<T>> {
 		return result;
 	}
 
-	private int medianThree(T[] array, int leftIndex, int rightIndex){
+	private void medianThree(T[] array, int leftIndex, int rightIndex){
 
 		int meio = (leftIndex + rightIndex) / 2;
 
@@ -86,14 +86,12 @@ public class QuickSelect<T extends Comparable<T>> {
 		if (array[meio].compareTo(array[rightIndex]) > 0) {
 			Util.swap(array, rightIndex, meio);
 		}
-
-		Util.swap(array,meio, leftIndex+1);
-
-		return meio;
+		if (rightIndex-leftIndex>=2) {
+			Util.swap(array,meio, leftIndex+1);
+		}
 	}
 
 	private int partition(T[] array, int leftIndex, int rightIndex){
-
 		T pivot = array[leftIndex];
 		int i = leftIndex;
 

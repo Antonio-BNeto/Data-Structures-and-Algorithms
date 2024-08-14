@@ -35,10 +35,17 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
+		T[] Kmaiores;
  		if(array != null && k>=1 && k<=array.length){
-			
-		}
-		return null;
+			Kmaiores = (T[]) new Comparable[k];
+
+			for(int i=1; i<=k;i++){
+				array[k-i] = this.orderStatistics(array, i);
+			}
+		}else{
+			Kmaiores = (T[]) new Comparable[0];
+		} 
+		return Kmaiores;
 	}
 
 	/**

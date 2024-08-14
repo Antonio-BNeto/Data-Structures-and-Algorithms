@@ -25,7 +25,7 @@ public class FloorBinarySearchTest {
         this.vetorValoresIguais = new Integer[]{1, 2, 4, 5, 1, 68, -1, 2, 1};
         //[-1, 1, 1, 1, 2, 2, 4, 5, 68]
         this.vetorDoisValores = new Integer[]{0, 20};
-        //[0, 1]
+        //[0, 20]
         this.vetorUnitario = new Integer[]{18};
         //[18]
     }
