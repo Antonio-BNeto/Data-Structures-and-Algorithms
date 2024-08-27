@@ -20,19 +20,12 @@ public class QueueUsingStack<T> implements Queue<T> {
 		if(isFull()){
 			throw new QueueOverflowException();
 		}
-		try {
-			if(element != null){
-				while(!this.stack1.isEmpty()){
-					this.stack2.push(this.stack1.pop());
-				}
-
+		if(element != null){
+			try{
 				this.stack1.push(element);
-				while (!this.stack2.isEmpty()) {
-					this.stack1.push(this.stack2.pop());
-				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
-		} catch (StackOverflowException | StackUnderflowException e) {
-			throw new QueueOverflowException();
 		}
 	}
 
@@ -41,18 +34,52 @@ public class QueueUsingStack<T> implements Queue<T> {
 		if(this.isEmpty()){
 			throw new QueueUnderflowException();
 		}
-		try {
-			return this.stack1.pop();
-		} catch (StackUnderflowException e) {
-			throw new QueueUnderflowException();
+		while(!isEmpty()){
+			try{
+				this.stack2.push(this.stack1.pop());
+			}catch(Exception e){
+				break;
+			}
 		}
+
+		T dequeued = null;
+
+		try{	
+			dequeued = stack2.pop();
+		}catch(Exception e){}
+		
+		while(!stack2.isEmpty()){
+			try{
+				this.stack1.push(this.stack2.pop());
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		return dequeued;
 	}
 
 	@Override
 	public T head() {
 		T head = null;
 		if(!isEmpty()){
-			head = this.stack1.top();
+			while(!stack1.isEmpty()){
+				try{
+					this.stack2.push(this.stack1.pop());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+			head = stack2.top();
+
+			while(!stack2.isEmpty()){
+				try{
+					this.stack1.push(stack2.pop());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
 		}
 		return head;
 	}
