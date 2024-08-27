@@ -32,15 +32,29 @@ public class StudentQueueTest {
 
 	private void getImplementations() {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
-		queue1 = null;
-		queue2 = null;
-		queue3 = null;
+			// Queue
+		//queue1 = new QueueImpl<Integer>(4);
+		//queue2 = new QueueImpl<Integer>(2);
+		//queue3 = new QueueImpl<Integer>(2);
+			// CircularQueue
+		//queue1 = new CircularQueue<Integer>(4);
+		//queue2 = new CircularQueue<Integer>(2);
+		//queue3 = new CircularQueue<Integer>(2);
+			// QueueUsingStack
+		queue1 = new QueueUsingStack<Integer>(4);
+		queue2 = new QueueUsingStack<Integer>(2);
+		queue3 = new QueueUsingStack<Integer>(2);
 	}
 
 	// MÉTODOS DE TESTE
 	@Test
 	public void testHead() {
 		assertEquals(new Integer(1), queue1.head());
+	}
+
+	@Test
+	public void testHeadNull(){
+		assertEquals(null, queue3.head());
 	}
 
 	@Test
@@ -64,10 +78,32 @@ public class StudentQueueTest {
 		}
 	}
 
+	@Test
+	public void testEnqueueNull() throws QueueOverflowException{
+		queue1.enqueue(null);
+		assertEquals(queue1.head(), new Integer(1));
+	}
+
+	@Test
+	public void testEnqueueCircular() throws QueueOverflowException, QueueUnderflowException {
+		CircularQueue<Integer> queue = new CircularQueue<Integer>(4);
+		queue.enqueue(new Integer(6));
+		queue.enqueue(new Integer(4));
+		queue.enqueue(new Integer(3));
+		queue.enqueue(new Integer(2));
+		assertEquals(new Integer(6), queue.dequeue());
+		assertEquals(new Integer(4), queue.head());
+		assertEquals(false, queue.isFull());
+		queue.enqueue(new Integer(5));
+		assertEquals(new Integer(4), queue.head());
+		assertEquals(true, queue.isFull());
+
+	}
+
 	@Test(expected = QueueOverflowException.class)
 	public void testEnqueueComErro() throws QueueOverflowException {
 		queue1.enqueue(new Integer(5)); // vai depender do tamanho que a fila
-										// foi iniciada!!!
+		queue1.enqueue(new Integer(6));								// foi iniciada!!!
 	}
 
 	@Test
@@ -83,7 +119,8 @@ public class StudentQueueTest {
 	@Test(expected = QueueUnderflowException.class)
 	public void testDequeueComErro() throws QueueUnderflowException {
 		assertEquals(new Integer(1), queue1.dequeue()); // vai depender do
-														// tamanho que a fial
-														// foi iniciada!!!
+		assertEquals(new Integer(2), queue1.dequeue());// tamanho que a fial
+		assertEquals(new Integer(3), queue1.dequeue());// foi iniciada!!!
+		assertEquals(new Integer(4), queue1.dequeue());
 	}
 }
