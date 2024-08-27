@@ -2,8 +2,6 @@ package adt.queue;
 
 import adt.stack.Stack;
 import adt.stack.StackImpl;
-import adt.stack.StackOverflowException;
-import adt.stack.StackUnderflowException;
 
 public class QueueUsingStack<T> implements Queue<T> {
 
