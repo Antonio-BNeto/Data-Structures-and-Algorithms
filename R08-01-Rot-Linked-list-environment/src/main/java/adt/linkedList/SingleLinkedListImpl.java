@@ -1,6 +1,5 @@
 package adt.linkedList;
 
-import java.lang.reflect.Array;
 
 public class SingleLinkedListImpl<T> implements LinkedList<T> {
 

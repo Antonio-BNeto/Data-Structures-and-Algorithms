@@ -5,27 +5,35 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 	protected DoubleLinkedListNode<T> last;
 
-	@Override
-	public void insertFirst(T element) {
+
+	@Override 
+	public T search(T element){
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
 	@Override
+	public void insertFirst(T element) {
+		if(element != null){
+		}
+	}
+
+	@Override
 	public void removeFirst() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(!head.isNIL()){
+			head = head.next;
+			if(head.isNIL()){
+				last = (DoubleLinkedListNode<T>) head;
+			}else{
+				head.getPrevious() = new DoubleLinkedListNode();
+			}
+		}
 	}
 
 	@Override
 	public void removeLast() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
-	}
-
-	@Override
-	public T search(T element){
-		return null;
 	}
 
 	public DoubleLinkedListNode<T> getLast() {
