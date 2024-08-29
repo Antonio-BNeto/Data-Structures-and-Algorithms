@@ -51,15 +51,16 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 
 	@Test
 	public void testInsert(){
-		//Assert.assertEquals(3, lista1.size());
+		Assert.assertEquals(3, lista1.size());
 		lista1.insert(5);
 		lista1.insert(7);
-		//Assert.assertEquals(5, lista1.size());
+		Assert.assertEquals(5, lista1.size());
 
-		//Assert.assertEquals(0, lista2.size());
+		Assert.assertEquals(0, lista2.size());
 		lista2.insert(4);
 		lista2.insert(7);
-		//Assert.assertEquals(2, lista2.size());
+		Assert.assertEquals(2, lista2.size());
 	}
+	
 
 }
