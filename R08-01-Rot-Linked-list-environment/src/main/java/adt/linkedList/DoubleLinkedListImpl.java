@@ -95,13 +95,15 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 	@Override
 	public void insert(T element){
 		if(element != null){
+			DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<>();
+			newLast.setData(element);
+			newLast.setPrevious(last);
+			newLast.setNext(new DoubleLinkedListNode<>());
+			last.setNext(newLast);
 			if(this.isEmpty()){
-				getHead().setData(element);
-			}else{
-				DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<>(element, new DoubleLinkedListNode<>(), this.getLast());
-				this.last.setNext(newLast);
-				this.setLast(newLast);
+				head = newLast;
 			}
+			last = newLast;
 		}
 	}
 

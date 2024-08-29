@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-08-29T14:20:16.234-0300</date>
+  <logger>ANTONIO BARROS DE ALCANTARA NETO</logger>
+  <level>FINE</level>
+  <message>File 123110363-ANTONIO BARROS DE ALCANTARA NETO.zip was received. It was sent by ANTONIO BARROS DE ALCANTARA NETO from IP 150.165.74.64 at 29-08-2024 14*20*16</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-08-29T15:11:51.355-0300</date>
+  <logger>ANTONIO BARROS DE ALCANTARA NETO</logger>
+  <level>FINE</level>
+  <message>File 123110363-ANTONIO BARROS DE ALCANTARA NETO.zip was received. It was sent by ANTONIO BARROS DE ALCANTARA NETO from IP 150.165.74.64 at 29-08-2024 15*11*51</message>
+</record>
