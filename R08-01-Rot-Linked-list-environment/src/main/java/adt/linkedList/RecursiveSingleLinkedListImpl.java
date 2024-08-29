@@ -11,61 +11,67 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		if(data == null){
-			return true;
-		}else{
-			return false;
-		}
+		return this.getData() == null;
 	}
 
 	@Override
 	public int size() {
-		int result = 0;
-		if(!isEmpty()){
-			result = 1+next.size();
+		int size = 0;
+		if(!this.isEmpty()){
+			size = 1+next.size();
 		}
-		return result;
+		return size;
 	}
 
 	@Override
 	public T search(T element) {
-		T result = null;
-		if(!isEmpty()){
-			if(data == element){
-				result = data;
+		T search = null;
+		if(!this.isEmpty() && element != null){
+			if(this.getData().equals(element)){
+				search = this.data;
 			}else{
-				result = next.search(element);
+				search = this.next.search(element);
 			}
 		}
-		return result;
+		return search;
 	}
 
 	@Override
 	public void insert(T element) {
-		if(isEmpty()){
-			data = element;
-			next = new RecursiveSingleLinkedListImpl<T>();
-		}else{
-			next.insert(element);
+		if(element!= null){
+			if(isEmpty()){
+				this.setData(element);
+				this.next = new RecursiveSingleLinkedListImpl<T>();
+			}else{
+				this.next.insert(element);
+			}
 		}
 	}
 
 	@Override
 	public void remove(T element) {
-		if(!isEmpty()){
-			if(data == element){
-				data = next.data;
-				next = next.next;
+		if(!isEmpty() && element!= null){
+			if(this.getData().equals(element)){
+				this.setData(this.next.getData());
+				this.setNext((this.getNext()));
 			}else{
-				next.remove(element);
+				this.next.remove(element);
 			}
 		}
 	}
 
 	@Override
 	public T[] toArray() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T[] array = (T[]) new Object[this.size()];
+		this.toArray(array, 0);
+		return array;
+	}
+
+	private void toArray(T[] array, int i){
+		if(!this.isEmpty()){
+			array[i] = this.getData();
+			this.next.toArray(array, i+1);
+		}
 	}
 
 

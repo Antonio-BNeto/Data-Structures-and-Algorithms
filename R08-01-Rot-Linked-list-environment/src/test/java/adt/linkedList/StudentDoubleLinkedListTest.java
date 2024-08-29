@@ -5,7 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
-
+	private DoubleLinkedList<Integer> lista1;
+	private DoubleLinkedList<Integer> lista2;
 	private DoubleLinkedList<Integer> lista3;
 
 	@Before
@@ -24,9 +25,9 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 
 	private void getImplementations() {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
-		lista1 = null;
-		lista2 = null;
-		lista3 = null;
+		lista1 = new DoubleLinkedListImpl<>();
+		lista2 = new DoubleLinkedListImpl<>();
+		lista3 = new DoubleLinkedListImpl<>();
 	}
 
 	// Métodos de DoubleLinkedList
@@ -47,5 +48,29 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 	public void testRemoveLast() {
 		((DoubleLinkedList<Integer>) lista1).removeLast();
 		Assert.assertArrayEquals(new Integer[] { 3, 2 }, lista1.toArray());
+	}
+
+	// Metodos sobreescritos
+
+	@Test
+	public void testInsert() {
+		Assert.assertEquals(3, lista1.size());
+		lista1.insert(5);
+		lista1.insert(7);
+		Assert.assertEquals(5, lista1.size());
+
+		Assert.assertEquals(0, lista2.size());
+		lista2.insert(4);
+		lista2.insert(7);
+		Assert.assertEquals(2, lista2.size());
+	}
+
+
+
+	@Test
+	public void testSearch() {
+		Assert.assertTrue(2 == lista1.search(2));
+		Assert.assertNull(lista1.search(4));
+		Assert.assertFalse(3 == lista1.search(2));
 	}
 }

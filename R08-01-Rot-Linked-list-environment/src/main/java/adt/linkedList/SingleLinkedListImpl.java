@@ -11,71 +11,78 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return head.isNIL();	
+		return this.head.isNIL();	
 	}
 
 	@Override
 	public int size() {
 		int size = 0;
-		SingleLinkedListNode<T> aux = head;
+		SingleLinkedListNode<T> aux = getHead();
 		while(!aux.isNIL()){
 			size ++;
-			aux = aux.next;
+			aux = aux.getNext();
 		}
 		return size;
 	}
 
 	@Override
 	public T search(T element) {
-		SingleLinkedListNode<T> auxHead = head;
-		while(!auxHead.isNIL() && auxHead.data != element){
-			auxHead = auxHead.next;
+		T search = null;
+		if(!isEmpty()&& element!=null){
+			SingleLinkedListNode<T> auxHead = getHead();
+			while(!auxHead.isNIL() && !auxHead.getData().equals(element)){
+				auxHead = auxHead.getNext();
+			}
+			search = auxHead.getData();
 		}
-		return auxHead.data;
+		return search;
+		
 	}
 
 	@Override
 	public void insert(T element) {
-		SingleLinkedListNode<T> auxhead = this.head;
-		if(head.isNIL()){
-			SingleLinkedListNode<T> newHead = new SingleLinkedListNode<T>();
-			newHead.data = element;
-			newHead.next = head;
-			head = newHead;
-		}else{
-			while (!auxhead.isNIL()){
-				auxhead = auxhead.next;
-			}
-			auxhead.data = element;
-			auxhead.next = new SingleLinkedListNode<T>();
-		}
-	}
-
-	@Override
-	public void remove(T element) {
-		if(head.data.equals(element)){
-			head = head.next;
-		}else{
-			SingleLinkedListNode<T> aux = head;
-			while (!aux.isNIL() && aux.data != element){
-				aux = aux.next;
-			}
-			if(!aux.isNIL()){
-				aux.data = aux.next.data;
-				aux.next = aux.next.next;
+		if (element != null) {
+			SingleLinkedListNode<T> auxHead = getHead();
+			if(this.isEmpty()){
+				SingleLinkedListNode<T> newHead = new SingleLinkedListNode<T>(element, getHead());
+				this.setHead(newHead);
+			}else{
+				while (!auxHead.isNIL()){
+					auxHead = auxHead.getNext();
+				}
+				auxHead.data = element;
+				auxHead.next = new SingleLinkedListNode<>();
 			}
 		}
 		
 	}
 
 	@Override
+	public void remove(T element) {
+		if(!isEmpty() && element != null){
+			if(this.head.getData().equals(element)){
+				this.setHead(this.getHead().getNext());
+			}else{
+				SingleLinkedListNode<T> aux = getHead();
+				while (!aux.isNIL() && aux.data != element){
+					aux = aux.getNext();
+				}
+				if(!aux.isNIL()){
+					aux.setData(aux.getNext().getData());
+					aux.setNext(aux.getNext().getNext());
+				}
+			}
+		}
+	}
+
+	@Override
 	public T[] toArray() {
 		T[] elements = (T[]) new Object[this.size()];
-		SingleLinkedListNode<T> aux = head;
+		SingleLinkedListNode<T> aux = getHead();
 		int cont = 0;
 		while(!aux.isNIL()){
-			elements[cont] = aux.data;
-			aux = aux.next;
+			elements[cont] = aux.getData();
+			aux = aux.getNext();
 			cont ++;
 		}
 		return elements;
