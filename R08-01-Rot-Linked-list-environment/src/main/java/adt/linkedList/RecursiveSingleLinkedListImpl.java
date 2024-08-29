@@ -39,7 +39,7 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public void insert(T element) {
 		if(element!= null){
-			if(isEmpty()){
+			if(this.isEmpty()){
 				this.setData(element);
 				this.next = new RecursiveSingleLinkedListImpl<T>();
 			}else{
@@ -50,10 +50,10 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public void remove(T element) {
-		if(!isEmpty() && element!= null){
+		if(!this.isEmpty() && element!= null){
 			if(this.getData().equals(element)){
 				this.setData(this.next.getData());
-				this.setNext((this.getNext()));
+				this.setNext((this.next.getNext()));
 			}else{
 				this.next.remove(element);
 			}

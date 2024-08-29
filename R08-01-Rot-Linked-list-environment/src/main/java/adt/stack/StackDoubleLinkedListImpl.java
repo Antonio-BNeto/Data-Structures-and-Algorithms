@@ -18,24 +18,26 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 		if(isFull()){
 			throw new StackOverflowException();
 		}if(element != null){
-			this.top.insert(element);
+			this.top.insertFirst(element);
 		}
 
 	}
 
 	@Override
 	public T pop() throws StackUnderflowException {
+		T dequeued = null;
 		if (this.isEmpty()) {
 			throw new StackUnderflowException();
+		}else{
+			dequeued = this.top();
+			this.top.removeFirst();
 		}
-		T dequeued = ((DoubleLinkedListImpl<T>)this.top).getLast().getData();
-		this.top.removeLast();
 		return dequeued;
 	}
 
 	@Override
 	public T top() {
-		return ((DoubleLinkedListImpl<T>)this.top).getLast().getData();
+		return ((DoubleLinkedListImpl<T>)this.top).getHead().getData();
 	}
 
 	@Override

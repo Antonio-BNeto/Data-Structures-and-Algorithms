@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +33,7 @@ public class StudentQueueTest {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
 		queue1 = new QueueDoubleLinkedListImpl<>(4);
 		queue2 = new QueueDoubleLinkedListImpl<>(2);
-		queue3 = new QueueDoubleLinkedListImpl<>(4);
+		queue3 = new QueueDoubleLinkedListImpl<>(3);
 	}
 
 	// MÉTODOS DE TESTE
