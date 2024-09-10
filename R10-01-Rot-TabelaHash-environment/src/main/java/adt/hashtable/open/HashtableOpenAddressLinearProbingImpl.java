@@ -13,8 +13,12 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		this.initiateInternalTable(size);
 	}
 
+
 	@Override
 	public void insert(T element) {
+		if(isFull()){
+			throw new HashtableOverflowException();
+		}
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
