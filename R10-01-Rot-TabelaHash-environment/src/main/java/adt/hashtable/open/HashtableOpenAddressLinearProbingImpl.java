@@ -19,7 +19,7 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		if(isFull()){
 			throw new HashtableOverflowException();
 		}
-		if(element != null && this.search(element) != null){
+		if(element != null && this.search(element) == null){
 			int probe = 0;
 			int index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
 
