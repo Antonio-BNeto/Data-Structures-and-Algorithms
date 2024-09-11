@@ -16,21 +16,25 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		if(isFull()){
-			throw new HashtableOverflowException();
-		}
 		if(element != null && this.search(element) == null){
 			int probe = 0;
-			int index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
 
-			while(this.table[index] != null && !this.table[index].equals(this.deletedElement) 
-			&& probe < this.table.length){
-				probe ++;
-				index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
-				this.COLLISIONS++;
+			while(probe < capacity()){
+				int index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
+
+				if(this.table[index] == null || this.table[index].equals(this.deletedElement)){
+					this.table[index] = element;
+					this.elements++;
+					break;
+				}else{
+					probe ++;
+					this.COLLISIONS++;
+				}
 			}
-			this.table[index] = element;
-			this.elements++;
+
+			if(probe == capacity()){
+				throw new HashtableOverflowException();
+			}
 		}
 	}
 
@@ -47,7 +51,8 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 	public T search(T element) {
 		T search = null;
 		int index = indexOf(element);
-		if(index >= 0){
+
+		if(element != null && index >= 0){
 			search = (T) this.table[index];
 		}
 
@@ -56,18 +61,26 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public int indexOf(T element) {
-		int i = -1;
+		int result = -1;
 		if(!isEmpty() && element != null){
 			int probe = 0;
-			int index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
-			while(this.table[index] != null && !this.table[index].equals(element) && probe<this.table.length){
+
+			while(probe < capacity()){
+				int index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
+
+				if(this.table[index] == null){
+					break;
+				}
+
+				if(this.table[index].equals(element)){
+					result =index;
+					break;
+				}
+
 				probe ++;
-				index = ((HashFunctionLinearProbing<T>)this.hashFunction).hash(element, probe);
-			}
-			if(this.table[index] != null && this.table[index].equals(element)){
-				i = index;
+				
 			}
 		}
-		return i;
+		return result;
 	}
 }
