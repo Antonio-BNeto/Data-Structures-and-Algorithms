@@ -1,5 +1,7 @@
 package adt.bst;
 
+import adt.bt.BTNode;
+
 public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	protected BSTNode<T> root;
@@ -47,8 +49,34 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.root.isEmpty()){
+			this.root = (BSTNode<T>) new BSTNode.Builder<T>()
+								.data(element)
+								.left(new BTNode<>())
+								.right(new BSTNode<>())
+								.build();	
+			
+			this.root.getLeft().setParent(root);
+
+			this.root.getRight().setParent(root);
+		}else{
+			this.insert(element, root);
+		}
+	}
+
+	private void insert(T element, BSTNode<T> node){
+		if(node.isEmpty()){
+			node.setData(element);
+			node.setLeft(new BSTNode<T>());
+			node.getLeft().setParent(node);
+
+			node.setRight(new BSTNode<T>());
+			node.getRight().setParent(node);
+		}else if(element.compareTo(node.getData()) < 0){
+			this.insert(element, (BSTNode<T>) node.getLeft());
+		}else{
+			this.insert(element, (BSTNode<T>) node.getRight());
+		}
 	}
 
 	@Override
@@ -153,8 +181,10 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		BSTNode<T> node = search(element);
+		if(!node.isEmpty()){
+			
+		}
 	}
 
 	@Override
