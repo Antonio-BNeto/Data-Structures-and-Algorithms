@@ -21,9 +21,19 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public int height() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return height(this.root);
 	}
+
+	private int height(BSTNode<T> node){
+		int result = -1;
+
+		if(!node.isEmpty()){
+			result = 1 + Math.max(height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
+		}
+
+		return result;
+	}
+	
 
 	@Override
 	public BSTNode<T> search(T element) {
@@ -60,11 +70,11 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 			this.root.getRight().setParent(root);
 		}else{
-			this.insert(element, root);
+			this.insert(this.root, element);
 		}
 	}
 
-	private void insert(T element, BSTNode<T> node){
+	private void insert(BSTNode<T> node, T element){
 		if(node.isEmpty()){
 			node.setData(element);
 			node.setLeft(new BSTNode<T>());
@@ -73,9 +83,9 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 			node.setRight(new BSTNode<T>());
 			node.getRight().setParent(node);
 		}else if(element.compareTo(node.getData()) < 0){
-			this.insert(element, (BSTNode<T>) node.getLeft());
+			this.insert((BSTNode<T>) node.getLeft(), element);
 		}else{
-			this.insert(element, (BSTNode<T>) node.getRight());
+			this.insert((BSTNode<T>) node.getRight(), element);
 		}
 	}
 
@@ -182,8 +192,54 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public void remove(T element) {
 		BSTNode<T> node = search(element);
+
 		if(!node.isEmpty()){
-			
+			if(node.isLeaf()){
+				if(node == root){
+					root = new BSTNode<T>();
+				}else{
+					node.setData(null);
+					node.setLeft(null);
+					node.setRight(null);
+				}
+
+			}else if(node.getRight().isEmpty()){
+				if(node == root){
+					root =(BSTNode<T>) root.getLeft();
+					root.setParent(null);
+				}else{
+					BSTNode<T> parent = (BSTNode<T>) node.getParent();
+
+					if(node.getLeft().getData().compareTo(parent.getData()) < 0){
+						parent.setLeft(node.getLeft());
+					}else{
+						parent.setRight(node.getLeft());
+					}
+
+					node.getLeft().setLeft(parent);
+
+				}
+
+			}else if(node.getLeft().isEmpty()){
+				if(node == root){
+					root = ((BSTNode<T>) root.getRight());
+					root.setParent(null);
+
+				}else{
+					BSTNode<T> parent = (BSTNode<T>) node.getParent();
+					if(node.getRight().getData().compareTo(parent.getData())<0){
+						parent.setLeft(node.getRight());
+					}else{
+						parent.setRight(node.getRight());
+					}
+
+					node.getLeft().setParent(parent);
+				}
+			}else{
+				T aux = minimum((BSTNode<T>) node.getRight()).getData();
+				remove(aux);
+				node.setData(aux);
+			}
 		}
 	}
 
