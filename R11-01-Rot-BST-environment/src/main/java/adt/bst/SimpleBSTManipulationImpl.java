@@ -8,8 +8,6 @@ package adt.bst;
  */
 public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements SimpleBSTManipulation<T> {
 
-	private int count = 0;
-
 	@Override
 	public boolean equals(BST<T> tree1, BST<T> tree2) {
 		// TODO Implement this method
