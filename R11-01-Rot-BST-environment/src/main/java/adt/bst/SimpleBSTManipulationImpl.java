@@ -12,7 +12,7 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 	public boolean equals(BST<T> tree1, BST<T> tree2) {
 		boolean result = false;
 
-		if(!tree1.isEmpty() && !tree2.isEmpty()){
+		if(tree1 != null && tree2 != null){
 			result = equals((BSTNode<T>)tree1.getRoot(),(BSTNode<T>)tree2.getRoot());
 		}
 
