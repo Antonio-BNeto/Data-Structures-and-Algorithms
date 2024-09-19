@@ -88,10 +88,10 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		int right = right(position);
 		int largest = position;
 
-		if(left<= this.size() && this.comparator.compare(heap[left], heap[right]) > 0){
+		if(left<= this.index && this.comparator.compare(heap[position], heap[left]) < 0){
 			largest = left;
 		}
-		if(right<= this.size() && this.comparator.compare(heap[right], heap[largest])>0){
+		if(right<= this.index && this.comparator.compare(heap[largest], heap[right]) < 0){
 			largest = right;
 		}
 		if(largest != position){
@@ -109,9 +109,10 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		}
 		// /////////////////////////////////////////////////////////////////
 		if(element != null){
-			this.heap[++ index] = element;
+			this.index++;
+			this.heap[index] = element;
 			int i = this.index;
-			while(i > 1 && this.comparator.compare(heap[i], heap[parent(i)]) < 0){
+			while(i > 0 && this.comparator.compare(heap[i], heap[parent(i)]) > 0){
 				Util.swap(heap, i, this.parent(i));
 				i = parent(i);
 			}
@@ -123,21 +124,21 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		this.heap = array.clone();
 		this.index = array.length-1;
 
-		for(int i = index; i>=0; i--){
+		for(int i = index; i >= 0; i--){
 			heapify(i);
 		}
 	}
 
 	@Override
 	public T extractRootElement() {
-		T result = null;
+		T extracted = null;
 		if(!this.isEmpty()){
-			result = this.rootElement();
-
-			heap[1] = heap[--this.index];
+			extracted = this.rootElement();
+			heap[0] = heap[this.index];
+			this.index --;
 			heapify(0);
 		}
-		return result;	
+		return extracted;	
 	}
 
 	@Override
@@ -150,8 +151,8 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		if(array.length >= 2){
 			buildHeap(array);
 
-			if(this.rootElement().compareTo(heap[this.index]) < 0){
-				for(int i = array.length; i >= 0; i--){
+			if(this.rootElement().compareTo(heap[this.index]) > 0){
+				for(int i = this.index; i >= 0; i--){
 					array[i] = this.extractRootElement();
 				}
 
