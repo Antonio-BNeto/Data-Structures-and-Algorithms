@@ -44,9 +44,9 @@ public class FloorCeilHeapImpl extends HeapImpl<Integer> implements FloorCeilHea
 		
 		if(root != null){
 			if(numero <= root && (ceil == null || root<= ceil)){
-				ceil = this.recursiveFloor(numero, root);
+				ceil = this.recursiveCeil(numero, root);
 			}else{
-				ceil = this.recursiveFloor(numero, ceil);
+				ceil = this.recursiveCeil(numero, ceil);
 			}
 		}
 		return ceil;
