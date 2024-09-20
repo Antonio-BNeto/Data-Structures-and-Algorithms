@@ -54,9 +54,9 @@ public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 	private Integer ceil(BSTNode<Integer> node, double number, Integer ceil){
 		if(!node.isEmpty()){
 			if(number < node.getData()){
-				ceil = this.floor((BSTNode<Integer>) node.getLeft(), number, node.getData());
+				ceil = this.ceil((BSTNode<Integer>) node.getLeft(), number, node.getData());
 			}else if(number > node.getData()){
-				ceil = this.floor((BSTNode<Integer>) node.getRight(), number, ceil);
+				ceil = this.ceil((BSTNode<Integer>) node.getRight(), number, ceil);
 			}else{
 				ceil = node.getData();
 			}

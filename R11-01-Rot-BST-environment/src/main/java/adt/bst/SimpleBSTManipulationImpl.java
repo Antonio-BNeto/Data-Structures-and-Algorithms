@@ -34,7 +34,11 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 
 	@Override
 	public boolean isSimilar(BST<T> tree1, BST<T> tree2) {
-		return this.isSimilar((BSTNode<T>)tree1.getRoot(),(BSTNode<T>)tree2.getRoot());
+		boolean result = false;
+		if(tree1 != null && tree2 != null){
+			result = this.isSimilar((BSTNode<T>)tree1.getRoot(),(BSTNode<T>)tree2.getRoot());
+		}
+		return result;
 	}
 
 	private boolean isSimilar(BSTNode<T> node1, BSTNode<T> node2){
@@ -54,7 +58,7 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 	@Override
 	public T orderStatistic(BST<T> tree, int k) {
 		T orderStatistic = null;
-		if(!tree.isEmpty()){
+		if(tree != null && !tree.isEmpty()){
 			int size = tree.size();
 			if(k>=1 && k <= size){
 				if(k == 1){
