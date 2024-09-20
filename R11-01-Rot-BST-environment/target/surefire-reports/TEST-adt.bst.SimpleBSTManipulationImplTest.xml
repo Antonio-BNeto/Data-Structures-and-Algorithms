@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="adt.heap.StudentMaxHeapTest" time="0.009" errors="0" skipped="0">
+<testsuite tests="20" failures="0" name="adt.bst.SimpleBSTManipulationImplTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.9+9-Ubuntu-122.04"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/antonio.barros.alcantara.neto/Documentos/LEDA/R12-01-Rot-HeapBinaria-environment"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/antonio.barros.alcantara.neto/Documentos/LEDA/R11-01-Rot-BST-environment"/>
     <property name="java.vm.vendor" value="Private Build"/>
     <property name="java.vendor.url" value="Unknown"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="BR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/antonio.barros.alcantara.neto/Documentos/LEDA/R12-01-Rot-HeapBinaria-environment"/>
+    <property name="user.dir" value="/home/antonio.barros.alcantara.neto/Documentos/LEDA/R11-01-Rot-BST-environment"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="17.0.9+9-Ubuntu-122.04"/>
     <property name="os.arch" value="amd64"/>
@@ -57,8 +57,24 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="adt.heap.StudentMaxHeapTest" name="testBuild" time="0.007"/>
-  <testcase classname="adt.heap.StudentMaxHeapTest" name="testSort" time="0.001"/>
-  <testcase classname="adt.heap.StudentMaxHeapTest" name="testInsert" time="0.001"/>
-  <testcase classname="adt.heap.StudentMaxHeapTest" name="testRemove" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest01" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest02" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest03" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest04" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest05" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest06" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest07" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="equalsTest08" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest01" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest02" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest03" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest04" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest05" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest06" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="orderStatisticTest07" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="isSimilarTest01" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="isSimilarTest02" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="isSimilarTest03" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="isSimilarTest04" time="0"/>
+  <testcase classname="adt.bst.SimpleBSTManipulationImplTest" name="isSimilarTest05" time="0"/>
 </testsuite>
