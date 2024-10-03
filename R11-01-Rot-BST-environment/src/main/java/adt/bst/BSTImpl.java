@@ -183,57 +183,62 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	}
 
 	@Override
-	public void remove(T element) {
-		BSTNode<T> node = search(element);
-		remove(node);
-	}
-
-	private boolean hasOneChild(BSTNode<T> node){
-		return (node.getLeft().isEmpty() && !node.getRight().isEmpty()) ||
-			(!node.getLeft().isEmpty() && node.getRight().isEmpty());
-	}
-
-	private void remove(BSTNode<T> node){
-		if(node != null && !node.isEmpty()){
-			if(node.isLeaf()){
-				node.setData(null);
-			
-			}else if(hasOneChild(node)){
-				if(node.getParent() != null){
-					if(node.getParent().getData().compareTo(node.getData()) > 0){
-						if(!node.getLeft().isEmpty()){
-							node.getParent().setLeft(node.getLeft());
-							node.getLeft().setParent(node.getParent());
-						}else{
-							node.getParent().setLeft(node.getRight());
-							node.getRight().setParent(node.getParent());
-						}
-						
-					}else{
-						if(!node.getLeft().isEmpty()){
-							node.getParent().setRight(node.getLeft());
-							node.getLeft().setParent(node.getParent());
-						}else{
-							node.getParent().setRight(node.getRight());
-							node.getRight().setParent(node.getParent());
-						}
-
-					}
-				}else{
-					if(node.getLeft().isEmpty()){
-						root = (BSTNode<T>) node.getRight();
-					}else{
-						root = (BSTNode<T>) node.getLeft();	
-					}
-					root.setParent(null);
-				}
-			}else{
-				BSTNode<T> sucessor = sucessor(node.getData());
-				node.setData(sucessor.getData());
-				remove(sucessor);
-			}
+	public void remove(T element){
+		BSTNode<T> node = this.search(element);
+		if(!node.isEmpty()){
+			this.recursiveRemove(node);
 		}
 	}
+
+	private boolean nodeHasOnlyChild(BSTNode<T> node){
+		return (!node.getLeft().isEmpty() && node.getRight().isEmpty())
+		|| (node.getLeft().isEmpty() && !node.getRight().isEmpty());
+	}
+
+	private void recursiveRemove(BSTNode<T> node){
+		
+		if(node.isLeaf()){
+			node.setData(null);
+			node.setLeft(null);
+			node.setRight(null);
+
+		}else if(nodeHasOnlyChild(node)){
+			if(!node.getLeft().isEmpty()){
+				if(node.equals(this.root)){
+					this.root = (BSTNode<T>)node.getLeft();
+					this.root.setParent(null);
+				}else{
+					node.getLeft().setParent(node.getParent());
+
+					if(node.getData().compareTo(node.getParent().getData()) < 0){
+						node.getParent().setLeft(node.getLeft());
+					}else{
+						node.getParent().setRight(node.getLeft());
+					}
+				}
+			}else if(!node.getRight().isEmpty()){
+				if(node.equals(this.root)){
+					this.root = (BSTNode<T>) node.getRight();
+					this.root.setParent(null);
+				}else{
+					node.getRight().setParent(node.getParent());
+
+					if(node.getData().compareTo(node.getParent().getData()) < 0){
+						node.getParent().setLeft(node.getRight());
+					}else{
+						node.getParent().setRight(node.getRight());
+					}
+				}	
+
+			}
+		}else{
+			BSTNode<T> sucessor = this.sucessor(node.getData());
+			T element = sucessor.getData();
+			this.recursiveRemove(sucessor);
+			node.setData(element);
+		}
+	}
+
 
 	@Override
 	public T[] preOrder() {
