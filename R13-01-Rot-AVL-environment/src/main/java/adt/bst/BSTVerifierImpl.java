@@ -49,7 +49,10 @@ public class BSTVerifierImpl<T extends Comparable<T>> implements BSTVerifier<T> 
 		boolean result = true;
 
 		if(!right.isEmpty()){
-			if(right.getData().compareTo(currentNode.getData()) < 0){
+			if (right.getData().compareTo(currentNode.getData()) > 0) {
+				result = isValidNodeRight((BSTNode<T>)right.getLeft(), currentNode)
+						&& isValidNodeRight((BSTNode<T>)right.getRight(), currentNode);
+			}else{
 				result = false;
 			}
 		}
@@ -64,7 +67,10 @@ public class BSTVerifierImpl<T extends Comparable<T>> implements BSTVerifier<T> 
 		boolean result = true;
 
 		if(!left.isEmpty()){
-			if(left.getData().compareTo(currentNode.getData()) > 0){
+			if (left.getData().compareTo(currentNode.getData()) < 0) {
+				result = isValidNodeLeft((BSTNode<T>)left.getLeft(), currentNode)
+						&& isValidNodeLeft((BSTNode<T>)left.getRight(), currentNode);
+			} else {
 				result = false;
 			}
 		}
